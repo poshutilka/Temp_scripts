@@ -5,14 +5,10 @@ class Human:
     # ответ по умолчанию для всех одинаковый, можно 
     # доверить его родительскому классу
     def answer_question(self, question):
-        print(f'Очень интересный вопрос! Не знаю.')
+        return(f'Очень интересный вопрос! Не знаю.')
 
 
 class Student(Human):
-    def __init__(self, name, someone=None, question=None):
-        super().__init__(name)
-        self.someone = someone
-        self.question = question
     #  метод ask_question() принимает параметр someone:
     #  это объект, экземпляр класса Curator, Mentor или CodeReviewer,
     #  которому Student задаёт вопрос; 
@@ -20,44 +16,38 @@ class Student(Human):
     #  имя объекта и текст вопроса задаются при вызове метода ask_question
     def ask_question(self, someone, question):
         # напечатайте на экран вопрос в нужном формате
-        print(f'{self.someone}, {self.question}')
+        print(f'{someone.name}, {question}')
         # запросите ответ на вопрос у someone
-        super().answer_question(question)
+        print(f'{someone.answer_question(question)}')
         print()  # этот print выводит разделительную пустую строку	
 
 
 class Curator(Human):
-    def __init__(self, question):
-        self.question = question
-
     def answer_question(self, question):
-              if question == 'мне грустненько, что делать':
-                  print(f'Держись, всё получится. Хочешь видео с котиками?')
-              return super().answer_question(question)
+              if question == 'мне грустненько, что делать?':
+                  return(f'Держись, всё получится. Хочешь видео с котиками?')
+              else:
+                   return super().answer_question(question)
         # здесь нужно проверить, пришёл куратору знакомый вопрос или нет
         # если да - ответить на него
         # если нет - вызвать метод answer_question() у родительского класса
 
 # объявите и реализуйте классы CodeReviewer и Mentor
 class CodeReviewer(Human):
-    def __init__(self, question):
-        self.question = question
-
-    def answer_question(self, question):
+ def answer_question(self, question):
               if question == 'что не так с моим проектом?':
-                  print(f'О, вопрос про проект, это я люблю.')
-              return super().answer_question(question)
+                  return(f'О, вопрос про проект, это я люблю.')
+              else:
+                   return super().answer_question(question)
               
 class Mentor(Human):
-    def __init__(self, question):
-        self.question = question
-        
     def answer_question(self, question):
               if question == 'мне грустненько, что делать?':
-                  print(f'Отдохни и возвращайся с вопросами по теории.')
-              elif question == 'как устроиться на работу питонистом?':
-                  print(f'Сейчас расскажу.')
-              return super().answer_question(question)
+                  return(f'Отдохни и возвращайся с вопросами по теории.')
+              elif question == 'как устроиться работать питонистом?':
+                  return(f'Сейчас расскажу.')
+              else:
+                   return super().answer_question(question)
 
 # следующий код менять не нужно, он работает, мы проверяли
 student1 = Student('Тимофей')
